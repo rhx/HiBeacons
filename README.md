@@ -1,8 +1,8 @@
 HiBeacons
 =========
-**A Swift 3 demo app for the iBeacons API in iOS 10, with Apple Watch support (watchOS 3.0)**
+**A Swift 5.1 demo app for the iBeacons API in iOS 10+, with Apple Watch support (watchOS 3.0+)**
 
-HiBeacons is a fully functional demo app for the iBeacons API in iOS 10, updated for Swift 3. The app can be used to demonstrate beacon region monitoring, advertising and ranging, simply by toggling on/off three switches in the UI, or the accompanying Apple Watch app.
+HiBeacons is a fully functional demo app for the iBeacons API in iOS 10 (or higher), updated for Swift 5.1. The app can be used to demonstrate beacon region monitoring, advertising and ranging, simply by toggling on/off three switches in the UI, or the accompanying Apple Watch app.
 
 The apps implement a basic interface for starting all the operations from the iPhone and the Apple Watch, but the state of the various beacon operation can only be seen in the phone. (The watch app acts as a simple* remote).
 
@@ -12,7 +12,7 @@ The app is fully documented, using the reStructuredText standard, which SourceKi
 
 The main branch of the project is the *swift* branch, but you can still find the old Objective-C code at the *obj-c* branch. Note that the old branch has some bugs, that I have fixed in the new one.
 
-*The app is fully documented, and should work well with Xcode 8, iOS 10, and watchOS 3.*
+*The app is fully documented, and should work well with Xcode 11, iOS 10+, and watchOS 3+.*
 
 ## Screenshots
 
