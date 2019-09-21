@@ -30,6 +30,8 @@
 	<string>This is required for monitoring.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This is required for ranging.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This is required for monitoring.</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>HiBeacons will only use Bluetooth in the background when it advertises itself as a beacon.</string>
 	<key>UIBackgroundModes</key>
