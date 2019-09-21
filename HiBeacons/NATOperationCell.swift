@@ -42,10 +42,10 @@ final class NATOperationCell : UITableViewCell
 
         let rightAccessoryViewMarginConstraint = NSLayoutConstraint(item: accessoryView!, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1.0, constant: -14.0)
         let topAccessoryViewMarginConstraint = NSLayoutConstraint(item: accessoryView!, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 7.0)
-        let activityViewWidthConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0)
-        let activityViewHeightConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0)
-        let rightActivityViewMarginConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .right, relatedBy: .equal, toItem: accessoryView, attribute: .left, multiplier: 1.0, constant: -8.0)
-        let topActivityViewMarginConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: accessoryView!, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+        let activityViewWidthConstraint = NSLayoutConstraint(item: activityIndicator!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0)
+        let activityViewHeightConstraint = NSLayoutConstraint(item: activityIndicator!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 20.0)
+        let rightActivityViewMarginConstraint = NSLayoutConstraint(item: activityIndicator!, attribute: .right, relatedBy: .equal, toItem: accessoryView, attribute: .left, multiplier: 1.0, constant: -8.0)
+        let topActivityViewMarginConstraint = NSLayoutConstraint(item: activityIndicator!, attribute: .centerY, relatedBy: .equal, toItem: accessoryView!, attribute: .centerY, multiplier: 1.0, constant: 0.0)
 
         addConstraints([rightAccessoryViewMarginConstraint,
                         topAccessoryViewMarginConstraint,

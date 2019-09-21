@@ -82,7 +82,8 @@ final class NATRangingOperation: NATOperation
             return
         }
 
-        switch CLLocationManager.authorizationStatus() {
+        let status = CLLocationManager.authorizationStatus()
+        switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             turnOnRanging()
         case .denied, .restricted:
@@ -90,6 +91,8 @@ final class NATRangingOperation: NATOperation
             delegate?.rangingOperationDidFailToStartDueToAuthorization()
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            print("Unknown authorization status \(status.rawValue)")
         }
     }
 

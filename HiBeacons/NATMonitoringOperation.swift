@@ -77,7 +77,8 @@ final class NATMonitoringOperation: NATOperation
             return
         }
 
-        switch CLLocationManager.authorizationStatus() {
+        let status = CLLocationManager.authorizationStatus()
+        switch status {
         case .authorizedAlways:
             turnOnMonitoring()
         case .authorizedWhenInUse, .denied, .restricted:
@@ -85,6 +86,8 @@ final class NATMonitoringOperation: NATOperation
             delegate?.monitoringOperationDidFailToStartDueToAuthorization()
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
+        @unknown default:
+            print("Unknown authorization status \(status.rawValue)")
         }
     }
 

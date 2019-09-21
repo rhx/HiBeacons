@@ -746,6 +746,8 @@ extension CLBeacon
             proximityText = "Far"
         case .unknown:
             proximityText = "Unknown"
+        @unknown default:
+            proximityText = "Unknown \(proximity.rawValue)"
         }
 
         return "\(major), \(minor) •  \(proximityText) • \(accuracy) • \(rssi)"
