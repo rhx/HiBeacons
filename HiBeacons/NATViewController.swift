@@ -157,7 +157,7 @@ class NATViewController: UIViewController
     /// Sets up the default WCSession instance.
     override func viewDidAppear(_ animated: Bool) {
         if WCSession.isSupported() {
-            mainSession = WCSession.default()
+            mainSession = WCSession.default
             mainSession!.delegate = self
             mainSession!.activate()
         }
@@ -301,21 +301,21 @@ extension NATViewController: UITableViewDataSource, UITableViewDelegate
             case NATOperationType.monitoring.index():
                 monitoringSwitch = operationCell.accessoryView as? UISwitch
                 monitoringActivityIndicator = operationCell.activityIndicator
-                monitoringSwitch.addTarget(self, action: #selector(changeMonitoringState), for: UIControlEvents.valueChanged)
+                monitoringSwitch.addTarget(self, action: #selector(changeMonitoringState), for: UIControl.Event.valueChanged)
             case NATOperationType.advertising.index():
                 advertisingSwitch = operationCell.accessoryView as? UISwitch
                 advertisingActivityIndicator = operationCell.activityIndicator
-                advertisingSwitch.addTarget(self, action: #selector(changeAdvertisingState), for: UIControlEvents.valueChanged)
+                advertisingSwitch.addTarget(self, action: #selector(changeAdvertisingState), for: UIControl.Event.valueChanged)
             case NATOperationType.ranging.index():
                 rangingSwitch = cell?.accessoryView as? UISwitch
-                rangingSwitch.addTarget(self, action: #selector(changeRangingState), for: UIControlEvents.valueChanged)
+                rangingSwitch.addTarget(self, action: #selector(changeRangingState), for: UIControl.Event.valueChanged)
             default:
                 break
             }
         case NATSectionType.detectedBeacons.rawValue:
             let beacon = detectedBeacons[(indexPath as NSIndexPath).row]
 
-            cell = cell ?? UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellIdentifier)
+            cell = cell ?? UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: cellIdentifier)
 
             cell!.textLabel?.text = beacon.proximityUUID.uuidString
             cell!.detailTextLabel?.text = beacon.fullDetails()
@@ -375,7 +375,7 @@ extension NATViewController: UITableViewDataSource, UITableViewDelegate
         let headerView = UITableViewHeaderFooterView(reuseIdentifier: kBeaconsHeaderViewIdentifier)
 
         // Adds an activity indicator view to the section header
-        let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        let indicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         headerView.addSubview(indicatorView)
         indicatorView.frame = CGRect(origin: kActivityIndicatorPosition, size: indicatorView.frame.size)
         indicatorView.startAnimating()
@@ -388,19 +388,19 @@ extension NATViewController: UITableViewDataSource, UITableViewDelegate
 extension NATViewController
 {
     /// Changes the monitoring operation state, according to the switch's value.
-    func changeMonitoringState() {
+    @objc func changeMonitoringState() {
         monitoringActive = monitoringSwitch.isOn
         updateMonitoringState()
     }
 
     /// Changes the advertising operation state, according to the switch's value.
-    func changeAdvertisingState() {
+    @objc func changeAdvertisingState() {
         advertisingActive = advertisingSwitch.isOn
         updateAdvertisingState()
     }
 
     /// Changes the ranging operation state, according to the switch's value.
-    func changeRangingState() {
+    @objc func changeRangingState() {
         rangingActive = rangingSwitch.isOn
         updateRangingState()
     }
@@ -465,11 +465,11 @@ extension NATViewController: NATMonitoringOperationDelegate
         let cancelButtonTitle = "Cancel"
         let settingsButtonTitle = "Settings"
 
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertActionStyle.cancel, handler: nil)
-        let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertActionStyle.default) {
+        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertAction.Style.cancel, handler: nil)
+        let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertAction.Style.default) {
                 (action: UIAlertAction) -> Void in
-            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
         alertController.addAction(cancelAction);
         alertController.addAction(settingsAction);
@@ -499,7 +499,7 @@ extension NATViewController: NATMonitoringOperationDelegate
         let mutableNotificationContent = UNMutableNotificationContent()
         mutableNotificationContent.title = "Beacon Region Entered"
         mutableNotificationContent.body = "Entered beacon region for UUID: " + region.proximityUUID.uuidString
-        mutableNotificationContent.sound = UNNotificationSound.default()
+        mutableNotificationContent.sound = UNNotificationSound.default
 
         let notificationRequest = UNNotificationRequest(identifier: "RegionEntered", content: mutableNotificationContent, trigger: nil)
 
@@ -536,8 +536,8 @@ extension NATViewController: NATAdvertisingOperationDelegate
         let message = "It seems that Bluetooth is off. For advertising to work, please turn Bluetooth on."
         let cancelButtonTitle = "OK"
 
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertActionStyle.cancel, handler: nil)
+        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertAction.Style.cancel, handler: nil)
         alertController.addAction(cancelAction);
         self.present(alertController, animated: true, completion: nil)
 
@@ -583,11 +583,11 @@ extension NATViewController: NATRangingOperationDelegate
         let cancelButtonTitle = "Cancel"
         let settingsButtonTitle = "Settings"
 
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertActionStyle.cancel, handler: nil)
-        let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertActionStyle.default) {
+        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let cancelAction = UIAlertAction.init(title: cancelButtonTitle, style: UIAlertAction.Style.cancel, handler: nil)
+        let settingsAction = UIAlertAction.init(title: settingsButtonTitle, style: UIAlertAction.Style.default) {
             (action: UIAlertAction) -> Void in
-            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
         alertController.addAction(cancelAction);
         alertController.addAction(settingsAction);
@@ -609,7 +609,7 @@ extension NATViewController: NATRangingOperationDelegate
         DispatchQueue.main.async { () -> Void in
             self.beaconTableView.beginUpdates()
             if let deletedSections = self.deletedSections() {
-                self.beaconTableView.deleteSections(deletedSections, with: UITableViewRowAnimation.fade)
+                self.beaconTableView.deleteSections(deletedSections, with: UITableView.RowAnimation.fade)
             }
             self.beaconTableView.endUpdates()
 
@@ -651,19 +651,19 @@ extension NATViewController: NATRangingOperationDelegate
 
             self.beaconTableView.beginUpdates()
             if self.insertedSections() != nil {
-                self.beaconTableView.insertSections(self.insertedSections()!, with: UITableViewRowAnimation.fade)
+                self.beaconTableView.insertSections(self.insertedSections()!, with: UITableView.RowAnimation.fade)
             }
             if self.deletedSections() != nil {
-                self.beaconTableView.deleteSections(self.deletedSections()!, with: UITableViewRowAnimation.fade)
+                self.beaconTableView.deleteSections(self.deletedSections()!, with: UITableView.RowAnimation.fade)
             }
             if insertedRows != nil {
-                self.beaconTableView.insertRows(at: insertedRows!, with: UITableViewRowAnimation.fade)
+                self.beaconTableView.insertRows(at: insertedRows!, with: UITableView.RowAnimation.fade)
             }
             if deletedRows != nil {
-                self.beaconTableView.deleteRows(at: deletedRows!, with: UITableViewRowAnimation.fade)
+                self.beaconTableView.deleteRows(at: deletedRows!, with: UITableView.RowAnimation.fade)
             }
             if reloadedRows != nil {
-                self.beaconTableView.reloadRows(at: reloadedRows!, with: UITableViewRowAnimation.fade)
+                self.beaconTableView.reloadRows(at: reloadedRows!, with: UITableView.RowAnimation.fade)
             }
             self.beaconTableView.endUpdates()
         }
@@ -750,4 +750,9 @@ extension CLBeacon
 
         return "\(major), \(minor) •  \(proximityText) • \(accuracy) • \(rssi)"
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

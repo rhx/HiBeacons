@@ -87,7 +87,7 @@ class NATHiBeaconsInterfaceController: WKInterfaceController
         rangingButton?.setBackgroundColor(inactiveBackgroundColor)
 
         if WCSession.isSupported() {
-            defaultSession = WCSession.default()
+            defaultSession = WCSession.default
             defaultSession!.delegate = self
             defaultSession!.activate()
         }

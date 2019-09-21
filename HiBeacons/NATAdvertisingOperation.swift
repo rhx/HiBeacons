@@ -110,7 +110,7 @@ extension NATAdvertisingOperation: CBPeripheralManagerDelegate
 {
     /// Triggered when the peripheral manager starts advertising.
     func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        if error != nil {
+        if let error = error {
             print("Couldn't turn on advertising: \(error)")
             delegate?.advertisingOperationDidFailToStart()
         }

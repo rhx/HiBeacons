@@ -120,13 +120,13 @@ extension NATMonitoringOperation
 
     /// Triggered when the location manager has detected entering a given region.
     func locationManager(_ manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
-        print("Entered region: \(region)")
+        print("Entered region: \(String(describing: region))")
         delegate?.monitoringOperationDidDetectEnteringRegion(region as! CLBeaconRegion)
     }
 
     /// Triggered when the location manager has detected exiting a given region.
     func locationManager(_ manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-        print("Exited region: \(region)")
+        print("Exited region: \(String(describing: region))")
     }
 
     /// Triggered when the state has been determined for a given region.
@@ -142,6 +142,6 @@ extension NATMonitoringOperation
             stateString = "unknown"
         }
 
-        print("State changed to " + stateString + " for region \(region).")
+        print("State changed to " + stateString + " for region \(String(describing: region)).")
     }
 }

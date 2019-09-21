@@ -61,6 +61,6 @@ final class NATOperationCell : UITableViewCell
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.contentView.bringSubview(toFront: activityIndicator)
+        self.contentView.bringSubviewToFront(activityIndicator)
     }
 }
