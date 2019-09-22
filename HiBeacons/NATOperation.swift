@@ -35,7 +35,15 @@ class NATOperation: NSObject, CLLocationManagerDelegate
 
     /// The beacon region that will be used as the reference for monitoring and ranging.
     let beaconRegion: CLBeaconRegion = {
-        let region = CLBeaconRegion(proximityUUID: UUID(uuidString: "416C0120-5960-4280-A67C-A2A9BB166D0F")!, identifier: "Identifier")
+        let u = UUID(uuidString: "416C0120-5960-4280-A67C-A2A9BB166D0F")!
+        let id = "Identifier"
+        let region: CLBeaconRegion
+        if #available(iOS 13.0, *) {
+            let constraint = CLBeaconIdentityConstraint(uuid: u)
+            region = CLBeaconRegion(beaconIdentityConstraint: constraint, identifier: id)
+        } else {
+            region = CLBeaconRegion(proximityUUID: u, identifier: id)
+        }
         region.notifyEntryStateOnDisplay = true
         return region
     }()
